@@ -1,0 +1,12 @@
+<h1>Create Subject</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if success_message %}<p><strong>{{ success_message }}</strong></p>{% endif %}
+<form action="/save/{% if subject.id %}{{ subject.id }}/{% endif %}" method="post">
+{% csrf_token %}
+    <label >Subject Name </label>
+    <input type="text" name="name" value="{% if subject.name %}{{ subject.name }}{% endif %}"><br>
+    <label >Subject Order </label>
+    <input type="text" name="order" value="{% if subject.order or subject.order != '' %}{{ subject.order }}{% endif %}"><br>
+<input type="submit" value="Save">
+<a href="/list/">Back List</a>
+</form>
