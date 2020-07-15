@@ -1,0 +1,16 @@
+# action.yml
+name: 'Check Flake8'
+description: 'Greet someone and record the time'
+inputs:
+  args:  # id of input
+    description: 'Arguments to pass to flake8'
+    required: true
+    default: '--help'
+# outputs:
+#   count: # id of output
+#     description: 'The exit code output by flake8'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.args }}
