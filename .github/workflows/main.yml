@@ -30,4 +30,4 @@ jobs:
       - name: Run send slack
         run: |
           pull_title = $(jq --raw-output .pull_request.title $GITHUB_EVENT_PATH)
-          echo $(pull_title)
+          echo $pull_title
