@@ -28,8 +28,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Run send slack
-        run: echo $GITHUB_ACTOR --- $(jq --raw-output .pull_request.number $GITHUB_EVENT_PATH) -- $GITHUB_RUN_ID -- $GITHUB_RUN_NUMBER --$(jq --raw-output .pull_request $GITHUB_EVENT_PATH)
+        run: echo $PULL_TITLE -- $PULL_LINK -- $AUTHOR_NAME
         env:
-          PULL_NUMBER: $(jq --raw-output .pull_request.number $GITHUB_EVENT_PATH)
-          AUTHOR_NAME: github.actor
+          PULL_TITLE: $(jq --raw-output .pull_request.title $GITHUB_EVENT_PATH)
+          PULL_LINK: $(jq --raw-output .pull_request.html_url $GITHUB_EVENT_PATH)
+          AUTHOR_NAME: $(jq --raw-output .pull_request.user.login $GITHUB_EVENT_PATH)
 
