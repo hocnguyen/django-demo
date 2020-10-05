@@ -4,21 +4,21 @@ on:
     types: [assigned, opened, synchronize, reopened]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  check_flake_8:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    - name: Run check flake 8
-      id: flake8
-      uses: ./.github/actions/check_flake8
-      with:
-        args: --ignore E251,E126,E128,E131,E121,E226,E261,E262,E402,E265,E501,E401,E722,E502,N802,N806,N803,N812,F403,F401,W292,W391,N801,W504,N814,W503,F405
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#  check_flake_8:
+#    # The type of runner that the job will run on
+#    runs-on: ubuntu-latest
+#
+#    # Steps represent a sequence of tasks that will be executed as part of the job
+#    steps:
+#    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#    - uses: actions/checkout@v2
+#    - name: Run check flake 8
+#      id: flake8
+#      uses: ./.github/actions/check_flake8
+#      with:
+#        args: --ignore E251,E126,E128,E131,E121,E226,E261,E262,E402,E265,E501,E401,E722,E502,N802,N806,N803,N812,F403,F401,W292,W391,N801,W504,N814,W503,F405
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   run_unitest:
     # The type of runner that the job will run on
@@ -28,8 +28,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Run send slack
-        run: echo $GITHUB_ACTOR
+        run: echo $GITHUB_ACTOR --- $(jq --raw-output .pull_request.number $GITHUB_EVENT_PATH)
         env:
-          PULL_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          PULL_NUMBER: $(jq --raw-output .pull_request.number $GITHUB_EVENT_PATH)
           AUTHOR_NAME: github.actor
 
