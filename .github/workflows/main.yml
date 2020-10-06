@@ -32,7 +32,7 @@ jobs:
         run: |
           echo ::set-output name=status::failure
           echo test
-          echo 1/0
+          echo $GITHUB_REPOSITOR Y
           echo ::set-output name=status::success
         continue-on-error: true
       - name: Run check info slack
