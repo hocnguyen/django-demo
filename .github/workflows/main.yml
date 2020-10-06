@@ -29,5 +29,5 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Run send slack
         run: |
-          pull_title = $(jq --raw-output .pull_request.title $GITHUB_EVENT_PATH)
-          echo $pull_title
+          echo $(jq --raw-output .pull_request.body $GITHUB_EVENT_PATH)
+          echo $(jq --raw-output .pull_request.title $GITHUB_EVENT_PATH)
