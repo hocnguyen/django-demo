@@ -29,9 +29,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Run get info slack
         id: first_status
-        run: echo 1111
+        run: echo ::set-output name=status::failure && echo test && echo ::set-output name=status::success
       - name: Run get info slack
-        if: !steps.first_status.outputs.status
+        if: steps.first_status.outputs.status == 'failure'
         run: |
           echo $(jq --raw-output .pull_request.body $GITHUB_EVENT_PATH)
           echo $GITHUB_REPOSITORY
