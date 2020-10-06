@@ -27,7 +27,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Run send slack
+      - name: Run get info slack
+        id: first_status
+        run: echo ::set-output name=status::success
+      - name: Run get info slack
+        if: steps.first_status.outputs.status == 'success'
         run: |
           echo $(jq --raw-output .pull_request.body $GITHUB_EVENT_PATH)
-          echo $(jq --raw-output .pull_request.title $GITHUB_EVENT_PATH)
+          echo $GITHUB_REPOSITORY
