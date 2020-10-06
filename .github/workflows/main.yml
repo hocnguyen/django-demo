@@ -38,7 +38,7 @@ jobs:
       - name: Run check info slack
         if: steps.first_status.outputs.status == 'failure'
         run: |
-          echo ${{ env.AUTHOR_NAME }} ${{ env.AUTHOR_LINK }}
+          echo "${{ env.AUTHOR_NAME }}" "${{ env.AUTHOR_LINK }}"
           exit 1
         env:
           AUTHOR_NAME: $(jq --raw-output .pull_request.user.login $GITHUB_EVENT_PATH)
