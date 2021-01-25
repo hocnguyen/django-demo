@@ -15,11 +15,12 @@ jobs:
     - uses: actions/setup-python@v1
 
     - name: Unit tests
-      run: python -m pip install Django && pip install coverage && coverage run ./manage.py test
+      run: python -m pip install Django && pip install coverage && coverage run ./manage.py test && coverage xml
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.1.2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        path--to-lcov: coverage.xml
 
   coveralls_finish:
     needs: run_ut
