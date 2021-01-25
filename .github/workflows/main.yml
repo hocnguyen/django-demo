@@ -15,7 +15,7 @@ jobs:
     - uses: actions/setup-python@v1
 
     - name: Unit tests
-      run: coverage run ./manage.py test
+      run: pip install coverage && coverage run ./manage.py test
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.1.2
       env:
