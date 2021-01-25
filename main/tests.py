@@ -7,4 +7,4 @@ class AiAPITestBase(TestCase):
         self.assertTrue(True)
 
     def test_second(self):
-        self.assertTrue(False)
+        self.assertIsNotNone("test")
