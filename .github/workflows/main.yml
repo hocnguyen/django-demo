@@ -17,4 +17,4 @@ jobs:
     - name: Unit tests
       run: python -m pip install Django && pip install coverage && coverage run ./manage.py test
     - name: Coveralls GitHub Action
-      uses: pip install coveralls && COVERALLS_REPO_TOKEN=skcNqDSGuBuOUQP4ZzYruyBq85u7xCvxp coveralls
+      run: pip install coveralls && COVERALLS_REPO_TOKEN=skcNqDSGuBuOUQP4ZzYruyBq85u7xCvxp coveralls
