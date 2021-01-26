@@ -21,7 +21,7 @@ def list(request):
 
 def create(request):
     if request.method == "POST":
-        Subject.objects.create(name=request.POST['name'], order=request.POST['order'])
+        Subject.create_subject(name=request.POST['name'], order=request.POST['order'])
         messages.success(request, 'Create subject successful')
         return redirect('/list/')
     return render(request, 'form.html')
