@@ -20,6 +20,7 @@ jobs:
       uses: AndreMiras/coveralls-python-action@develop
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: coverage.xml
 
   coveralls_finish:
     needs: run_ut
