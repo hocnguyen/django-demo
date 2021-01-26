@@ -15,7 +15,7 @@ jobs:
     - uses: actions/setup-python@v1
 
     - name: Unit tests
-      run: python -m pip install Django && pip install coverage && coverage run ./manage.py test && coverage xml
+      run: python -m pip install Django && pip install coverage && coverage run ./manage.py test && coverage xml -i
     - name: Coveralls GitHub Action
       uses: AndreMiras/coveralls-python-action@develop
       with:
