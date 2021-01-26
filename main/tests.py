@@ -1,6 +1,10 @@
 from django.test import TestCase
 
 
-class TestST(TestCase):
+class AiAPITestBase(TestCase):
+
     def test_first(self):
-        self.assertEqual(1,2)
+        self.assertTrue(True)
+
+    def test_second(self):
+        self.assertIsNotNone("test")
