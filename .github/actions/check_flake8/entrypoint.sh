@@ -80,7 +80,8 @@ then
 else
     # Feed to flake8 which will return the output in json format.
     # shellcheck disable=SC2086
-    flake8 $1 --format=json $new_files_in_branch | jq '.' > flake8_output.json || true # NOQA
+    param="--ignore E127,E251,E126,E128,E131,E121,E226,E261,E262,E402,E265,E501,E401,E722,E502,N802,N806,N803,N812,F403,F401,W292,W391,N801,W504,N814,W503,F405"
+    flake8 $param --format=json $new_files_in_branch | jq '.' > flake8_output.json || true # NOQA
     echo "New files in branch: $new_files_in_branch"
     python ./.github/actions/check_flake8/main.py
 fi

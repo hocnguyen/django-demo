@@ -4,17 +4,19 @@ on:
     types: [assigned, opened, synchronize, reopened]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  run_ut:
+  run_flake8:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: demo-hoc
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
-
-    - name: Unit tests
-      run: python -m pip install Django && pip install coverage && coverage run ./manage.py test
-    - name: Coveralls GitHub Action
-      run: pip install coveralls && COVERALLS_REPO_TOKEN=skcNqDSGuBuOUQP4ZzYruyBq85u7xCvxp coveralls
+    - name: Checkout source code
+      run: cd ../ && ./clone.sh "${{ env.BRANCH }}"
+      env:
+        BRANCH: $(jq --raw-output .pull_request.head.ref $GITHUB_EVENT_PATH)
+    - name: Run check flake 8
+      id: flake8
+      run: bash .github/actions/check_flake8/entrypoint.sh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
