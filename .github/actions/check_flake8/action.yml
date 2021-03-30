@@ -10,7 +10,9 @@ inputs:
 #   count: # id of output
 #     description: 'The exit code output by flake8'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.args }}
+  using: 'composite'
+  steps:
+    - run: ./entrypoint.sh
+      shell: bash
+    args:
+      - ${{ inputs.args }}
