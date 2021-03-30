@@ -15,7 +15,5 @@ jobs:
     - name: Run check flake 8
       id: flake8
       run: ./.github/actions/check_flake8/entrypoint.sh
-      with:
-        args: --ignore E127,E251,E126,E128,E131,E121,E226,E261,E262,E402,E265,E501,E401,E722,E502,N802,N806,N803,N812,F403,F401,W292,W391,N801,W504,N814,W503,F405
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
