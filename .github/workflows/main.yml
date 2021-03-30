@@ -11,7 +11,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - name: Checkout source code
+      run: cd ../ && ./clone.sh "${{ env.BRANCH }}"
+      env:
+        BRANCH: $(jq --raw-output .pull_request.head.ref $GITHUB_EVENT_PATH)
     - name: Run check flake 8
       id: flake8
       run: bash .github/actions/check_flake8/entrypoint.sh
